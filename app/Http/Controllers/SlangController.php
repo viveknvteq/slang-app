@@ -65,4 +65,34 @@ class SlangController extends Controller
 
         return view('explore', compact('slangs'));
     }
+
+    public function edit($id)
+{
+    $slang = Slang::findOrFail($id);
+
+    // prevent editing others' slang
+    if ($slang->user_id != Auth::id()) {
+        abort(403);
+    }
+
+    return view('editslang', compact('slang'));
+}
+
+
+public function update(Request $request, $id)
+{
+    $slang = Slang::findOrFail($id);
+
+    if ($slang->user_id != Auth::id()) {
+        abort(403);
+    }
+
+    $slang->update([
+        'word' => $request->word,
+        'meaning' => $request->meaning
+        // 'example' => $request->example
+    ]);
+
+    return redirect('/dashboard')->with('success','Slang updated!');
+}
 }

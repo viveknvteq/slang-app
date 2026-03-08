@@ -8,20 +8,20 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index()
-    {
-        $totalUsers = User::count();
-        $totalSlangs = Slang::count();
-        $pendingSlangs = Slang::where('status', 'pending')->count();
-        $slangs = Slang::where('status', 'pending')->latest()->get();
+    // public function index()
+    // {
+    //     $totalUsers = User::count();
+    //     $totalSlangs = Slang::count();
+    //     $pendingSlangs = Slang::where('status', 'pending')->count();
+    //     $slangs = Slang::where('status', 'pending')->latest()->get();
 
-        return view('dashboard', compact(
-            'totalUsers',
-            'totalSlangs',
-            'pendingSlangs',
-            'slangs'
-        ));
-    }
+    //     return view('dashboard', compact(
+    //         'totalUsers',
+    //         'totalSlangs',
+    //         'pendingSlangs',
+    //         'slangs'
+    //     ));
+    // }
 
     public function adminDashboard()
     {
@@ -34,31 +34,33 @@ class DashboardController extends Controller
     }
 
     public function userDashboard()
-    {
-        $userId = Auth::id();
+{
+    // dd(Auth::user());
 
-        $mySlangs = Slang::where('user_id', $userId)->count();
+    $userId = Auth::id();
 
-        $approvedSlangs = Slang::where('user_id', $userId)
-            ->where('status', 'approved')
-            ->count();
+    $mySlangs = Slang::where('user_id', $userId)->count();
 
-        $pendingSlangs = Slang::where('user_id', $userId)
-            ->where('status', 'pending')
-            ->count();
+    $approvedSlangs = Slang::where('user_id', $userId)
+        ->where('status', 'approved')
+        ->count();
 
-        // Get user's slang list
-        $slangs = Slang::where('user_id', $userId)
-            ->latest()
-            ->get();
+    $pendingSlangs = Slang::where('user_id', $userId)
+        ->where('status', 'pending')
+        ->count();
 
-        return view('dashboard.user', compact(
-            'mySlangs',
-            'approvedSlangs',
-            'pendingSlangs',
-            'slangs'   // IMPORTANT
-        ));
-    }
+    $slangs = Slang::where('user_id', $userId)
+        ->latest()
+        ->paginate(5);
+
+    return view('dashboard.user', compact(
+        'mySlangs',
+        'approvedSlangs',
+        'pendingSlangs',
+        'slangs'
+    ));
+}
+
 
     public function approve($id)
     {

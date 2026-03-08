@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function slangs()
+    {
+        return $this->hasMany(Slang::class);
+    }
 }
