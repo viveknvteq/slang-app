@@ -27,7 +27,9 @@
         <div class="text-white font-bold text-xl">
             SlangApp
         </div>
-
+        <button id="menuBtn" class="md:hidden text-2xl">
+<i class="fa-solid fa-bars"></i>
+</button>
         <!-- MOBILE MENU BUTTON -->
         <div id="mobileMenu"
             class="hidden flex-col bg-gray-900 absolute right-0 top-16 w-48 p-4 space-y-3 z-50 shadow-lg">
