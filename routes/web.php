@@ -60,7 +60,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', function () {
         return view('profile');
     });
-
 });
 
 /*
@@ -80,7 +79,6 @@ Route::get('/search', [SlangController::class, 'search'])->name('slangs.search')
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'userDashboard'])->name('dashboard');
-
 });
 
 /*
@@ -96,7 +94,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/slang/{id}/approve', [DashboardController::class, 'approve'])->name('slang.approve');
 
     Route::delete('/slang/{id}', [DashboardController::class, 'delete'])->name('slang.delete');
-
 });
 Route::middleware(['auth'])->group(function () {
 
@@ -105,5 +102,4 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/slang/{id}', [SlangController::class, 'update'])->name('slang.update');
 
     Route::delete('/slang/{id}', [SlangController::class, 'destroy'])->name('slang.destroy');
-
 });
