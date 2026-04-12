@@ -54,45 +54,53 @@ class SlangController extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->search;
+        $query = trim($request->input('search', ''));
 
         $slangs = Slang::where('status', 'approved')
             ->where(function ($q) use ($query) {
                 $q->where('word', 'LIKE', "%$query%")
                     ->orWhere('meaning', 'LIKE', "%$query%");
             })
-            ->get();
+            ->orderByRaw('CASE WHEN word LIKE ? THEN 0 ELSE 1 END', ["{$query}%"])
+            ->limit(6);
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json(
+                $slangs->get(['word', 'meaning', 'slug'])
+            );
+        }
+        // VIEW response (OBJECTS)
+        $slangs = $slangs->get();
 
         return view('explore', compact('slangs'));
     }
 
     public function edit($id)
-{
-    $slang = Slang::findOrFail($id);
+    {
+        $slang = Slang::findOrFail($id);
 
-    // prevent editing others' slang
-    if ($slang->user_id != Auth::id()) {
-        abort(403);
+        // prevent editing others' slang
+        if ($slang->user_id != Auth::id()) {
+            abort(403);
+        }
+
+        return view('editslang', compact('slang'));
     }
 
-    return view('editslang', compact('slang'));
-}
+    public function update(Request $request, $id)
+    {
+        $slang = Slang::findOrFail($id);
 
+        if ($slang->user_id != Auth::id()) {
+            abort(403);
+        }
 
-public function update(Request $request, $id)
-{
-    $slang = Slang::findOrFail($id);
+        $slang->update([
+            'word' => $request->word,
+            'meaning' => $request->meaning,
+            // 'example' => $request->example
+        ]);
 
-    if ($slang->user_id != Auth::id()) {
-        abort(403);
+        return redirect('/dashboard')->with('success', 'Slang updated!');
     }
-
-    $slang->update([
-        'word' => $request->word,
-        'meaning' => $request->meaning
-        // 'example' => $request->example
-    ]);
-
-    return redirect('/dashboard')->with('success','Slang updated!');
-}
 }

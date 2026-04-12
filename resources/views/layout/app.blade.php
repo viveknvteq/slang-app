@@ -28,8 +28,8 @@
             SlangApp
         </div>
         <button id="menuBtn" class="md:hidden text-2xl">
-<i class="fa-solid fa-bars"></i>
-</button>
+            <i class="fa-solid fa-bars"></i>
+        </button>
         <!-- MOBILE MENU BUTTON -->
         <div id="mobileMenu"
             class="hidden flex-col bg-gray-900 absolute right-0 top-16 w-48 p-4 space-y-3 z-50 shadow-lg">
@@ -56,25 +56,23 @@
                     @csrf
                     <button class="text-red-400">Logout</button>
                 </form>
-
             @endauth
-
         </div>
-
-
     </nav>
 
 
     <!-- DESKTOP NAVBAR -->
-    <nav
-        class="hidden md:flex justify-between items-center px-8 py-4 backdrop-blur-md bg-white/5 border-b border-white/10 sticky top-0 z-50">
+<nav id="mainNavbar"
+    class="hidden md:flex justify-between items-center px-8 py-4 backdrop-blur-md bg-white/5 border-b border-white/10 sticky top-0 z-50">
 
         <div class="flex items-center gap-2">
             <i class="fa-solid fa-fire text-orange-500"></i>
 
-            <h1 class="text-2xl font-bold bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                SlangDict
-            </h1>
+            <a href="/">
+                <h1 class="text-2xl font-bold bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    SlangDict
+                </h1>
+            </a>
         </div>
 
         <div class="space-x-6 flex items-center">
@@ -132,5 +130,19 @@
 
 
 </body>
+<!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    });
+</script>
 
 </html>

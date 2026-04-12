@@ -6,12 +6,12 @@ use App\Models\Slang;
 
 class ExploreController extends Controller
 {
-
     public function index()
     {
-        $slangs = Slang::latest()->get();
+        $slangs = Slang::active()
+            ->latest()
+            ->paginate(10);
 
-        return view('explore',compact('slangs'));
+        return view('explore', compact('slangs'));
     }
-
 }

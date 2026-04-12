@@ -69,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
 */
 
 Route::get('/search', [SlangController::class, 'search'])->name('slangs.search');
-
+Route::get('/slangs/search', [App\Http\Controllers\SlangController::class, 'search'])->name('slangs.search');
 /*
 |--------------------------------------------------------------------------
 | User Dashboard
