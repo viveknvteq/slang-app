@@ -5,7 +5,9 @@
 @section('content')
 
     <div class="max-w-6xl mx-auto p-8">
-
+        <h2 class="text-xl text-gray-400">
+            Welcome {{ Auth::user()->name }} 👋
+        </h2>
         <!-- HEADER -->
         <div class="flex justify-between items-center mb-8">
 
@@ -13,12 +15,11 @@
                 User Dashboard
             </h1>
 
-            <a href="/addslang" class="bg-cyan-500 px-4 py-2 rounded-lg hover:bg-cyan-600">
+            <a href="/addslang" class="bg-cyan-500 px-4 py-2 rounded-lg hover:bg-cyan-600 transition">
                 + Add Slang
             </a>
 
         </div>
-
 
         <!-- USER STATS -->
         <div class="grid md:grid-cols-3 gap-6 mb-10">
@@ -46,7 +47,6 @@
 
         </div>
 
-
         <!-- MY SLANGS -->
         <div class="bg-white/5 p-6 rounded-xl">
 
@@ -57,11 +57,11 @@
             <div class="space-y-4">
 
                 @forelse($slangs as $slang)
-                    <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-4">
 
                         <div>
 
-                            <p class="font-semibold">
+                            <p class="font-semibold text-lg">
                                 {{ $slang->word }}
                             </p>
 
@@ -69,25 +69,58 @@
                                 {{ $slang->meaning }}
                             </p>
 
+                            <span
+                                class="text-xs
+                    {{ $slang->status == 'approved' ? 'text-green-400' : 'text-yellow-400' }}">
+
+                                {{ ucfirst($slang->status) }}
+
+                            </span>
+
                         </div>
 
-                        <span
-                            class="text-sm
-                    {{ $slang->approved ? 'text-green-400' : 'text-yellow-400' }}">
+                        <!-- ACTION BUTTONS -->
+                        <div class="flex gap-3">
 
-                            {{ $slang->approved ? 'Approved' : 'Pending' }}
 
-                        </span>
 
-                    </div>
+                                @if ($slang->status == 'pending')
+                                    <!-- Edit -->
+                                    <a href="{{ route('slang.edit', $slang->id) }}"
+                                        class="bg-blue-500 px-3 py-1 rounded text-sm hover:bg-blue-600">
+                                        Edit
+                                    </a>
 
-                @empty
+                                    <!-- Delete -->
+                                    <form action="{{ route('slang.destroy', $slang->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
 
-                    <p class="text-gray-400">
-                        You haven't submitted any slang yet.
-                    </p>
+                                        <button class="bg-red-500 px-3 py-1 rounded text-sm hover:bg-red-600">
+                                            Delete
+                                        </button>
+                                    </form>
+                                @else
+                                    <span class="text-green-400 text-sm font-semibold">
+                                        Approved ✔
+                                    </span>
+                                @endif
+
+
+                        </div>
+
+                    @empty
+
+                        <p class="text-gray-400">
+                            You haven't submitted any slang yet.
+                        </p>
                 @endforelse
 
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="mt-6">
+                {{ $slangs->links() }}
             </div>
 
         </div>

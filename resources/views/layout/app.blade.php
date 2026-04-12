@@ -27,13 +27,10 @@
         <div class="text-white font-bold text-xl">
             SlangApp
         </div>
-
+        <button id="menuBtn" class="md:hidden text-2xl">
+<i class="fa-solid fa-bars"></i>
+</button>
         <!-- MOBILE MENU BUTTON -->
-        <button id="menuBtn" class="text-2xl text-white z-50">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-
-        <!-- MOBILE MENU -->
         <div id="mobileMenu"
             class="hidden flex-col bg-gray-900 absolute right-0 top-16 w-48 p-4 space-y-3 z-50 shadow-lg">
 
@@ -41,10 +38,29 @@
             <a href="/explore" class="block text-white">Explore</a>
             <a href="/about" class="block text-white">About</a>
             <a href="/addslang" class="block text-white">Add Slang</a>
-            <a href="/login" class="block text-white">Login</a>
-            <a href="/register" class="block text-white">Register</a>
+
+            @guest
+                <a href="/login" class="block text-white">Login</a>
+                <a href="/register" class="block text-white">Register</a>
+            @endguest
+
+            @auth
+
+                @if (Auth::user()->role == 'admin')
+                    <a href="/admin/dashboard" class="block text-white">Admin Dashboard</a>
+                @else
+                    <a href="/dashboard" class="block text-white">Dashboard</a>
+                @endif
+
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="text-red-400">Logout</button>
+                </form>
+
+            @endauth
 
         </div>
+
 
     </nav>
 
@@ -68,11 +84,40 @@
             <a href="/about" class="hover:text-cyan-400">About</a>
             <a href="/addslang" class="hover:text-cyan-400">Add Slang</a>
 
-            <a href="/login" class="px-4 py-2 rounded hover:bg-white/10">Login</a>
+            @guest
 
-            <a href="/register" class="bg-cyan-500 px-4 py-2 rounded-lg hover:bg-cyan-600 shadow-lg shadow-cyan-500/30">
-                Register
-            </a>
+                <a href="/login" class="px-4 py-2 rounded hover:bg-white/10">
+                    Login
+                </a>
+
+                <a href="/register" class="bg-cyan-500 px-4 py-2 rounded-lg hover:bg-cyan-600 shadow-lg shadow-cyan-500/30">
+                    Register
+                </a>
+
+            @endguest
+
+
+            @auth
+
+                @if (Auth::user()->role == 'admin')
+                    <a href="/admin/dashboard" class="px-4 py-2 rounded bg-purple-500 hover:bg-purple-600">
+                        Admin Dashboard
+                    </a>
+                @else
+                    <a href="/dashboard" class="px-4 py-2 rounded bg-cyan-500 hover:bg-cyan-600">
+                        Dashboard
+                    </a>
+                @endif
+
+
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="px-4 py-2 bg-red-500 rounded hover:bg-red-600">
+                        Logout
+                    </button>
+                </form>
+
+            @endauth
 
         </div>
 

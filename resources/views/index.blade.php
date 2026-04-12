@@ -16,7 +16,7 @@
 
     <!-- HERO -->
 
-    <section class="flex flex-col items-center text-center mt-28 px-6">
+    <section class="flex flex-col items-center text-center mt-28 px-6 animate-fade">
 
         <h1 class="text-5xl md:text-6xl font-extrabold mb-6">
 

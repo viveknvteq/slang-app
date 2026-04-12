@@ -43,7 +43,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Admin','admin@gmail.com',NULL,'$2y$12$o5LNkXwBVxtdAQ1d3FI/GOR4YMBqs2pXm.Op/zUZoaMboJcTPB/.W','admin',NULL,'2026-03-07 12:34:02','2026-03-07 12:34:02'),(4,'user1','user1@gmail.com',NULL,'$2y$12$HZ5En3VeXrJXGRibOirqEu8R7KqKgClfkOL2nLYOg14BxsnUAFeAy','user',NULL,'2026-03-07 13:11:55','2026-03-07 13:11:55');
+INSERT INTO `users` VALUES (1,'Admin','admin@gmail.com',NULL,'$2y$12$o5LNkXwBVxtdAQ1d3FI/GOR4YMBqs2pXm.Op/zUZoaMboJcTPB/.W','admin',NULL,'2026-03-07 12:34:02','2026-03-07 12:34:02'),(2,'user1','user1@gmail.com',NULL,'$2y$12$HZ5En3VeXrJXGRibOirqEu8R7KqKgClfkOL2nLYOg14BxsnUAFeAy','user',NULL,'2026-03-07 13:11:55','2026-03-07 13:11:55');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
