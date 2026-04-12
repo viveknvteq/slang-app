@@ -9,11 +9,6 @@
     <div class="fixed top-0 left-0 w-96 h-96 bg-cyan-500 opacity-20 blur-3xl"></div>
     <div class="fixed bottom-0 right-0 w-96 h-96 bg-purple-600 opacity-20 blur-3xl"></div>
 
-
-
-
-
-
     <!-- HERO -->
 
     <section class="flex flex-col items-center text-center mt-28 px-6 animate-fade">
@@ -37,7 +32,7 @@
 
                 <input id="searchInput" type="text" name="search" placeholder="Search slang..."
                     class="w-full pl-12 pr-24 py-4 rounded-xl bg-white/5 border border-white/10
-                    focus:outline-none focus:border-cyan-400 text-white placeholder-gray-400">
+                        focus:outline-none focus:border-cyan-400 text-white placeholder-gray-400">
                 <i class="fa-solid fa-search absolute left-4 top-4 text-gray-400"></i>
 
                 <div id="results" class="bg-gray-900 mt-2 rounded-lg overflow-hidden"></div>
@@ -51,8 +46,6 @@
 
     </section>
 
-
-
     <!-- TRENDING -->
 
     <section class="mt-24 px-8">
@@ -61,20 +54,19 @@
             🔥 Trending Slang
         </h2>
 
-
         <div class="grid md:grid-cols-4 gap-6">
 
             @if (isset($slangs) && $slangs->count())
                 @foreach ($slangs as $slang)
                     <div
                         class="bg-white/5 p-6 rounded-xl text-center
-                                    border border-white/10
-                                    transition-all duration-300
-                                    hover:border-cyan-400
-                                    hover:bg-cyan-500/20
-                                    hover:scale-105
-                                    hover:shadow-[0_0_30px_rgba(34,211,238,0.6)]
-                                    relative hover:z-50">
+                                                border border-white/10
+                                                transition-all duration-300
+                                                hover:border-cyan-400
+                                                hover:bg-cyan-500/20
+                                                hover:scale-105
+                                                hover:shadow-[0_0_30px_rgba(34,211,238,0.6)]
+                                                relative hover:z-50">
 
                         <h3 class="text-xl font-bold">
                             {{ $slang->word }}
@@ -115,10 +107,8 @@
 
             <div
                 class="bg-white/5 backdrop-blur-lg p-10 rounded-2xl border border-white/10
-transition-all duration-300
-hover:scale-105
-hover:border-cyan-400
-hover:shadow-[0_0_40px_rgba(34,211,238,0.4)]">
+                            transition-all duration-300 hover:scale-105 hover:border-cyan-400
+                                hover:shadow-[0_0_40px_rgba(34,211,238,0.4)]">
 
                 <i class="fa-solid fa-magnifying-glass text-cyan-400 text-3xl mb-6"></i>
 
@@ -138,10 +128,8 @@ hover:shadow-[0_0_40px_rgba(34,211,238,0.4)]">
 
             <div
                 class="bg-white/5 backdrop-blur-lg p-10 rounded-2xl border border-white/10
-transition-all duration-300
-hover:scale-105
-hover:border-green-400
-hover:shadow-[0_0_40px_rgba(34,197,94,0.4)]">
+                        transition-all duration-300 hover:scale-105 hover:border-green-400
+                         hover:shadow-[0_0_40px_rgba(34,197,94,0.4)]">
 
                 <i class="fa-solid fa-plus text-green-400 text-3xl mb-6"></i>
 
@@ -161,10 +149,10 @@ hover:shadow-[0_0_40px_rgba(34,197,94,0.4)]">
 
             <div
                 class="bg-white/5 backdrop-blur-lg p-10 rounded-2xl border border-white/10
-                      transition-all duration-300
-                      hover:scale-105
-                      hover:border-purple-400
-                      hover:shadow-[0_0_40px_rgba(168,85,247,0.4)]">
+                          transition-all duration-300
+                          hover:scale-105
+                          hover:border-purple-400
+                          hover:shadow-[0_0_40px_rgba(168,85,247,0.4)]">
 
                 <i class="fa-solid fa-shield text-purple-400 text-3xl mb-6"></i>
 

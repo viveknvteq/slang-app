@@ -3,6 +3,33 @@
 @section('title', 'Admin Dashboard')
 
 @section('content')
+    <style>
+        .pagination svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .pagination span,
+        .pagination a {
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: #67e8f9 !important;
+            /* cyan */
+            border-radius: 6px !important;
+            padding: 6px 10px !important;
+            margin: 0 4px !important;
+        }
+
+        .pagination span[aria-current] {
+            background: #06b6d4 !important;
+            /* cyan active */
+            color: #000 !important;
+            font-weight: bold;
+        }
+
+        .pagination span[aria-disabled="true"] {
+            opacity: 0.4 !important;
+        }
+    </style>
 
     <div class="max-w-7xl mx-auto p-8">
 
@@ -48,6 +75,11 @@
                 Pending Slang Approvals
             </h2>
 
+             <!-- PAGINATION -->
+                <div class="mt-6 flex justify-end pagination">
+                    {{ $slangs->links() }}
+                </div>
+
             <div class="overflow-x-auto">
 
                 <table class="w-full text-left">
@@ -56,6 +88,7 @@
                         <tr>
                             <th class="py-3">Word</th>
                             <th>Meaning</th>
+                            <th>Example</th>
                             <th>Submitted By</th>
                             <th class="text-right">Actions</th>
                         </tr>
@@ -64,25 +97,35 @@
                     <tbody>
 
                         @forelse($slangs as $slang)
-                            <tr class="border-b border-white/10">
+                            <tr class="border-b border-white/10 align-top">
 
+                                <!-- Word -->
                                 <td class="py-4 font-semibold">
                                     {{ $slang->word }}
                                 </td>
 
-                                <td>
+                                <!-- Meaning -->
+                                <td class="text-gray-300 max-w-xs break-words">
                                     {{ $slang->meaning }}
                                 </td>
 
+                                <!-- Example (AUTO WRAP + LIMIT LOOK) -->
+                                <td class="text-gray-400 max-w-sm break-words">
+                                    <p class="line-clamp-3">
+                                        {{ $slang->example }}
+                                    </p>
+                                </td>
+
+                                <!-- User -->
                                 <td class="text-gray-400">
                                     {{ $slang->user->name ?? 'Anonymous' }}
                                 </td>
 
+                                <!-- Actions -->
                                 <td class="text-right">
 
                                     <div class="flex justify-end gap-2">
 
-                                        <!-- Approve -->
                                         <form action="{{ route('slang.approve', $slang->id) }}" method="POST">
                                             @csrf
                                             <button class="bg-green-500 px-3 py-1 rounded hover:bg-green-600 text-sm">
@@ -90,8 +133,8 @@
                                             </button>
                                         </form>
 
-                                        <!-- Delete -->
-                                        <form action="{{ route('slang.destroy', $slang->id) }}" method="POST"> @csrf
+                                        <form action="{{ route('slang.destroy', $slang->id) }}" method="POST">
+                                            @csrf
                                             @method('DELETE')
 
                                             <button class="bg-red-500 px-3 py-1 rounded hover:bg-red-600 text-sm">
@@ -104,11 +147,10 @@
                                 </td>
 
                             </tr>
-
                         @empty
 
                             <tr>
-                                <td colspan="4" class="text-center py-6 text-gray-400">
+                                <td colspan="5" class="text-center py-6 text-gray-400">
                                     No pending slang submissions
                                 </td>
                             </tr>
@@ -116,7 +158,10 @@
 
                     </tbody>
 
+
                 </table>
+
+
 
             </div>
 
