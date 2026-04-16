@@ -17,7 +17,7 @@
 
             <textarea name="meaning" class="w-full p-3 mb-4 bg-gray-800 rounded">{{ $slang->meaning }}</textarea>
 
-            {{-- <textarea name="example" class="w-full p-3 mb-4 bg-gray-800 rounded">{{ $slang->example }}</textarea> --}}
+            <textarea name="example" class="w-full p-3 mb-4 bg-gray-800 rounded">{{ $slang->example }}</textarea>
 
             <button class="bg-cyan-500 px-6 py-2 rounded">
                 Update Slang

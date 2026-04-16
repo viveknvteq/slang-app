@@ -16,10 +16,8 @@ return new class extends Migration
             $table->string('word');
             $table->text('meaning');
             $table->text('example');
-
             $table->string('entry_hash')->unique();
-            // $table->enum('status', ['pending', 'approved'])->default('pending');
-            // $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

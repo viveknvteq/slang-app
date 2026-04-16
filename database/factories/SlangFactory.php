@@ -45,6 +45,7 @@ class SlangFactory extends Factory
 
         return [
             'word' => $slang['word'],
+            'slug' => \Illuminate\Support\Str::slug($slang['word']),
             'meaning' => $slang['meaning'],
             'example' => $slang['example'],
 

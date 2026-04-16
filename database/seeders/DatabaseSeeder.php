@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
         Slang::factory()->count(25)->create();
 
+        // Approve all slangs for search functionality
+        Slang::where('status', '!=', 'approved')->update(['status' => 'approved']);
     }
-
-
 }
