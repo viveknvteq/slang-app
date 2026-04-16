@@ -11,7 +11,7 @@ class SlangController extends Controller
     public function explore()
     {
         // show only approved slangs
-        $slangs = Slang::where('status', 'approved')->latest()->get();
+        $slangs = Slang::where('status', 'approved')->latest()->paginate(12);
 
         return view('explore', compact('slangs'));
     }
@@ -23,6 +23,12 @@ class SlangController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'word' => 'required|string|max:255|unique:slangs',
+            'meaning' => 'required|string|max:1000',
+            'example' => 'nullable|string|max:1000',
+        ]);
+
         Slang::create([
             'user_id' => Auth::id(),
             'word' => $request->word,

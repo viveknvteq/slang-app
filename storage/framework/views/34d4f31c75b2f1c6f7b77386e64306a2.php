@@ -1,8 +1,6 @@
-@extends('layout.app')
+<?php $__env->startSection('title', 'Explore Slang'); ?>
 
-@section('title', 'Explore Slang')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <section class="max-w-7xl mx-auto px-6 py-16">
 
@@ -16,64 +14,44 @@
             </p>
         </div>
 
-        {{-- <div class="mb-10 flex justify-center" data-aos="fade-up">
-            <div class="relative w-full max-w-xl">
-
-                <i
-                    class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none z-10"></i>
-
-                <input id="searchInput" type="text" name="search" placeholder="Search slang..." autocomplete="off"
-                    class="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10
-                   text-white placeholder-gray-400 focus:outline-none focus:border-cyan-400
-                   transition-all duration-200">
-
-                <div id="searchResults"
-                    class="absolute top-full left-0 w-full mt-2 bg-gray-900 border border-white/10
-                   rounded-xl shadow-2xl z-[999] hidden overflow-hidden max-h-72 overflow-y-auto">
-                </div>
-
-            </div>
-        </div> --}}
+        
 
         <!-- Slang Grid -->
         <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
-            @foreach ($slangs as $slang)
+            <?php $__currentLoopData = $slangs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slang): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition duration-300 group"
-                    data-aos="zoom-in" data-word="{{ strtolower($slang->word) }}"
-                    data-meaning="{{ strtolower($slang->meaning) }}" data-example="{{ strtolower($slang->example) }}">
+                    data-aos="zoom-in" data-word="<?php echo e(strtolower($slang->word)); ?>"
+                    data-meaning="<?php echo e(strtolower($slang->meaning)); ?>" data-example="<?php echo e(strtolower($slang->example)); ?>">
 
                     <!-- Word -->
                     <h2 class="text-xl font-bold text-indigo-600 group-hover:text-indigo-500 transition">
-                        {{ $slang->word }}
+                        <?php echo e($slang->word); ?>
+
                     </h2>
 
                     <!-- Meaning -->
                     <p class="text-gray-600 dark:text-gray-300 mt-3 text-sm leading-relaxed">
-                        {{ $slang->meaning }}
+                        <?php echo e($slang->meaning); ?>
+
                     </p>
 
                     <!-- Example -->
                     <p class="text-xs text-gray-400 mt-4 italic">
-                        "{{ $slang->example }}"
+                        "<?php echo e($slang->example); ?>"
                     </p>
 
                     <!-- Status Badge -->
-                    {{-- <div class="mt-4">
-                    <span class="px-3 py-1 text-xs rounded-full
-                        {{ $slang->status === 'active' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600' }}">
-                        {{ ucfirst($slang->status) }}
-                    </span>
-                </div> --}}
+                    
 
                 </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
         </div>
 
     </section>
     <script>
-        const SEARCH_URL = "{{ route('slangs.search') }}";
+        const SEARCH_URL = "<?php echo e(route('slangs.search')); ?>";
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -219,4 +197,6 @@
             });
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\MCA2025\project\slang-app\resources\views/explore.blade.php ENDPATH**/ ?>

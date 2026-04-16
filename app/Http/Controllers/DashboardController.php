@@ -35,8 +35,6 @@ class DashboardController extends Controller
 
     public function userDashboard()
     {
-        // dd(Auth::user());
-
         $userId = Auth::id();
 
         $mySlangs = Slang::where('user_id', $userId)->count();

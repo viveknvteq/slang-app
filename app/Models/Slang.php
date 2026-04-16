@@ -12,9 +12,11 @@ class Slang extends Model
     protected $fillable = [
         'user_id',
         'word',
+        'slug',
         'meaning',
         'example',
         'status',
+        'entry_hash', // Add this
     ];
 
     public function user()
@@ -33,6 +35,10 @@ class Slang extends Model
         parent::boot();
 
         static::saving(function ($model) {
+            // Generate slug from word if not set
+            if (empty($model->slug)) {
+                $model->slug = \Illuminate\Support\Str::slug($model->word);
+            }
 
             $model->entry_hash = md5(
                 strtolower(

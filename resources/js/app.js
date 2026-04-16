@@ -12,7 +12,6 @@ if (btn && menu) {
     });
 }
 
-
 /* -------------------------
    SEARCH AUTOCOMPLETE
 --------------------------*/
@@ -20,34 +19,27 @@ if (btn && menu) {
 const input = document.getElementById("searchInput");
 const results = document.getElementById("results");
 
-const data = ["lit", "sus", "goat", "vibe", "flex", "no cap"];
+// Replace hardcoded data with API call
+input.addEventListener("input", async () => {
+    const value = input.value.toLowerCase();
+    results.innerHTML = "";
 
-if (input && results) {
+    if (value.length < 2) return;
 
-    input.addEventListener("input", () => {
+    try {
+        const response = await fetch(`/search?q=${encodeURIComponent(value)}`);
+        const data = await response.json();
 
-        const value = input.value.toLowerCase();
-        results.innerHTML = "";
-
-        if (value === "") return;
-
-        const filtered = data.filter(item =>
-            item.includes(value)
-        );
-
-        filtered.forEach(item => {
-
+        data.forEach(item => {
             results.innerHTML += `
-                    <p class="p-3 border-b border-white/10 hover:bg-white/10 cursor-pointer">
-                        ${item}
-                    </p>`;
-
+                <p class="p-3 border-b border-white/10 hover:bg-white/10 cursor-pointer">
+                    ${item.word}
+                </p>`;
         });
-
-    });
-
-}
-
+    } catch (error) {
+        console.error('Search error:', error);
+    }
+});
 
 /* -------------------------
    TOAST MESSAGE
@@ -65,7 +57,6 @@ function showToast(message) {
     }, 3000);
 
 }
-
 
 /* -------------------------
    AUTO WELCOME TOAST
