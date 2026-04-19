@@ -7,3 +7,6 @@
  * Admin credential: admin@gmail.com 
  * Password: password
  */
+<!-- reset link (paste when forgot password successed) -->
+http://127.0.0.1:8000/reset-password/TOKEN?email=vivekmotgharer%40gmail.com
+

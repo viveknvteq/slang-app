@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title', 'Login')
+@section('title', 'Reset Password')
 
 @section('content')
 
@@ -9,7 +9,7 @@
         <div class="bg-gray-900 p-8 rounded-2xl shadow-lg w-96">
 
             <h2 class="text-3xl font-bold text-white text-center mb-6">
-                Login
+                Reset Password
             </h2>
 
             @error('email')
@@ -18,15 +18,10 @@
                 </div>
             @enderror
 
-            @if (session('status'))
-                <div class="bg-green-500/20 text-green-400 p-3 rounded mb-4 text-sm text-center">
-                    {{ session('status') }}
-                </div>
-            @endif
-
-            <form method="POST" action="/login" class="space-y-4">
+            <form method="POST" action="{{ route('password.update') }}" class="space-y-4">
 
                 @csrf
+                <input type="hidden" name="token" value="{{ $token }}">
 
                 <div>
                     <label class="text-gray-400 text-sm">Email</label>
@@ -37,34 +32,25 @@
                 </div>
 
                 <div>
-                    <label class="text-gray-400 text-sm">Password</label>
-                    <input type="password" name="password" placeholder="Enter your password"
+                    <label class="text-gray-400 text-sm">New Password</label>
+                    <input type="password" name="password" placeholder="Enter new password"
                         class="w-full mt-1 p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
                         required>
+                </div>
 
-                    <div class="text-right mt-1">
-                        <a href="{{ route('password.request') }}"
-                            class="text-cyan-500 text-xs hover:text-cyan-400 transition duration-200">
-                            Forgot Password?
-                        </a>
-                    </div>
+                <div>
+                    <label class="text-gray-400 text-sm">Confirm Password</label>
+                    <input type="password" name="password_confirmation" placeholder="Confirm new password"
+                        class="w-full mt-1 p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        required>
                 </div>
 
                 <button type="submit"
                     class="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-semibold py-3 rounded-lg transition duration-300">
-                    Login
+                    Reset Password
                 </button>
 
             </form>
-
-            <p class="text-gray-400 text-sm text-center mt-4">
-                Don't have an account?
-                <a href="/register" class="text-cyan-400 hover:underline">Sign Up</a>
-            </p>
-
-            <div class="text-center mt-4">
-                <a href="/" class="text-gray-500 hover:text-white text-sm">← Back to Home</a>
-            </div>
 
         </div>
 
