@@ -5,7 +5,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\SlangController;
 use App\Models\Slang;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,11 +39,21 @@ Route::get('/register', function () {
 });
 Route::post('/register', [AuthController::class, 'register']);
 
-Route::post('/logout', function () {
-    Auth::logout();
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    return redirect('/');
-})->name('logout');
+// 🔑 Forgot / Reset Password
+Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
+Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.update');
+
+/*
+|--------------------------------------------------------------------------
+| Search
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/slangs/search', [SlangController::class, 'search'])->name('slangs.search');
 
 /*
 |--------------------------------------------------------------------------
@@ -60,24 +69,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', function () {
         return view('profile');
     });
-});
-
-/*
-|--------------------------------------------------------------------------
-| Search
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/slangs/search', [App\Http\Controllers\SlangController::class, 'search'])->name('slangs.search');
-/*
-|--------------------------------------------------------------------------
-| User Dashboard
-|--------------------------------------------------------------------------
-*/
-
-Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'userDashboard'])->name('dashboard');
+
+    Route::get('/slang/{id}/edit', [SlangController::class, 'edit'])->name('slang.edit');
+    Route::put('/slang/{id}', [SlangController::class, 'update'])->name('slang.update');
+    Route::delete('/slang/{id}', [SlangController::class, 'destroy'])->name('slang.destroy'); // ✅ user
 });
 
 /*
@@ -89,16 +86,6 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/admin/dashboard', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
-
     Route::post('/slang/{id}/approve', [DashboardController::class, 'approve'])->name('slang.approve');
-
-    Route::delete('/slang/{id}', [DashboardController::class, 'delete'])->name('slang.delete');
-});
-Route::middleware(['auth'])->group(function () {
-
-    Route::get('/slang/{id}/edit', [SlangController::class, 'edit'])->name('slang.edit');
-
-    Route::put('/slang/{id}', [SlangController::class, 'update'])->name('slang.update');
-
-    Route::delete('/slang/{id}', [SlangController::class, 'destroy'])->name('slang.destroy');
+    Route::delete('/admin/slang/{id}', [DashboardController::class, 'delete'])->name('slang.delete'); // ✅ admin — fixed URL
 });

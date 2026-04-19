@@ -1,4 +1,4 @@
-<?php $__env->startSection('title', 'Login'); ?>
+<?php $__env->startSection('title', 'Reset Password'); ?>
 
 <?php $__env->startSection('content'); ?>
 
@@ -7,7 +7,7 @@
         <div class="bg-gray-900 p-8 rounded-2xl shadow-lg w-96">
 
             <h2 class="text-3xl font-bold text-white text-center mb-6">
-                Login
+                Reset Password
             </h2>
 
             <?php $__errorArgs = ['email'];
@@ -24,16 +24,10 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
 
-            <?php if(session('status')): ?>
-                <div class="bg-green-500/20 text-green-400 p-3 rounded mb-4 text-sm text-center">
-                    <?php echo e(session('status')); ?>
-
-                </div>
-            <?php endif; ?>
-
-            <form method="POST" action="/login" class="space-y-4">
+            <form method="POST" action="<?php echo e(route('password.update')); ?>" class="space-y-4">
 
                 <?php echo csrf_field(); ?>
+                <input type="hidden" name="token" value="<?php echo e($token); ?>">
 
                 <div>
                     <label class="text-gray-400 text-sm">Email</label>
@@ -44,34 +38,25 @@ unset($__errorArgs, $__bag); ?>
                 </div>
 
                 <div>
-                    <label class="text-gray-400 text-sm">Password</label>
-                    <input type="password" name="password" placeholder="Enter your password"
+                    <label class="text-gray-400 text-sm">New Password</label>
+                    <input type="password" name="password" placeholder="Enter new password"
                         class="w-full mt-1 p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
                         required>
+                </div>
 
-                    <div class="text-right mt-1">
-                        <a href="<?php echo e(route('password.request')); ?>"
-                            class="text-cyan-500 text-xs hover:text-cyan-400 transition duration-200">
-                            Forgot Password?
-                        </a>
-                    </div>
+                <div>
+                    <label class="text-gray-400 text-sm">Confirm Password</label>
+                    <input type="password" name="password_confirmation" placeholder="Confirm new password"
+                        class="w-full mt-1 p-3 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        required>
                 </div>
 
                 <button type="submit"
                     class="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-semibold py-3 rounded-lg transition duration-300">
-                    Login
+                    Reset Password
                 </button>
 
             </form>
-
-            <p class="text-gray-400 text-sm text-center mt-4">
-                Don't have an account?
-                <a href="/register" class="text-cyan-400 hover:underline">Sign Up</a>
-            </p>
-
-            <div class="text-center mt-4">
-                <a href="/" class="text-gray-500 hover:text-white text-sm">← Back to Home</a>
-            </div>
 
         </div>
 
@@ -79,4 +64,4 @@ unset($__errorArgs, $__bag); ?>
 
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layout.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\MCA2025\project\slang-app\resources\views/login.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layout.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH E:\MCA2025\project\slang-app\resources\views/reset-password.blade.php ENDPATH**/ ?>
