@@ -183,14 +183,14 @@
 
         <div class="flex justify-center gap-6 mt-4 text-lg">
 
-            <a href="https://github.com/slangdict" target="_blank" class="hover:text-white">
+            <a href="https://github.com/motghareVivek/Slang_Management_System.git" target="_blank" class="hover:text-white">
                 <i class="fa-brands fa-github"></i>
             </a>
             <a href="https://instagram.com/slangdict" target="_blank" class="hover:text-white">
                 <i class="fa-brands fa-instagram"></i>
             </a>
             <a href="https://twitter.com/slangdict" target="_blank" class="hover:text-white">
-                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-x-twitter"></i>
             </a>
 
         </div>
