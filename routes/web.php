@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $slangs = Slang::latest()->take(4)->get();
+    $slangs = Slang::latest('created_at')->take(4)->get();
 
     return view('index', compact('slangs'));
 });

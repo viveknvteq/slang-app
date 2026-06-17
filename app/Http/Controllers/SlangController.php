@@ -11,7 +11,7 @@ class SlangController extends Controller
     public function explore()
     {
         // show only approved slangs
-        $slangs = Slang::where('status', 'approved')->latest()->paginate(12);
+        $slangs = Slang::where('status', '=', 'approved', 'and')->latest()->paginate(12);
 
         return view('explore', compact('slangs'));
     }
@@ -62,7 +62,7 @@ class SlangController extends Controller
     {
         $query = trim($request->input('search', ''));
 
-        $slangs = Slang::where('status', 'approved')
+        $slangs = Slang::where('status', '=', 'approved', 'and')
             ->where(function ($q) use ($query) {
                 $q->where('word', 'LIKE', "%$query%")
                     ->orWhere('meaning', 'LIKE', "%$query%");

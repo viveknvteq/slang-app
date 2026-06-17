@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -11,8 +12,8 @@ class SlangController extends Controller
     // GET /api/slangs (Explore)
     public function index()
     {
-        $slangs = Slang::where('status', 'approved')
-            ->latest()
+        $slangs = Slang::where('status', '=', 'approved', 'and')
+            ->orderBy('created_at', 'desc')
             ->paginate(12);
 
         return response()->json($slangs);
@@ -37,7 +38,7 @@ class SlangController extends Controller
 
         return response()->json([
             'message' => 'Slang submitted for approval',
-            'data' => $slang
+            'data' => $slang,
         ], 201);
     }
 
@@ -45,6 +46,7 @@ class SlangController extends Controller
     public function show($id)
     {
         $slang = Slang::findOrFail($id);
+
         return response()->json($slang);
     }
 
@@ -64,7 +66,7 @@ class SlangController extends Controller
 
         return response()->json([
             'message' => 'Updated successfully',
-            'data' => $slang
+            'data' => $slang,
         ]);
     }
 
@@ -80,7 +82,7 @@ class SlangController extends Controller
         $slang->delete();
 
         return response()->json([
-            'message' => 'Deleted successfully'
+            'message' => 'Deleted successfully',
         ]);
     }
 
@@ -94,7 +96,7 @@ class SlangController extends Controller
 
         return response()->json([
             'message' => 'Slang approved',
-            'data' => $slang
+            'data' => $slang,
         ]);
     }
 
@@ -103,10 +105,10 @@ class SlangController extends Controller
     {
         $query = trim($request->input('search', ''));
 
-        $slangs = Slang::where('status', 'approved')
+        $slangs = Slang::where('status', '=', 'approved', 'and')
             ->where(function ($q) use ($query) {
                 $q->where('word', 'LIKE', "%$query%")
-                  ->orWhere('meaning', 'LIKE', "%$query%");
+                    ->orWhere('meaning', 'LIKE', "%$query%");
             })
             ->orderByRaw('CASE WHEN word LIKE ? THEN 0 ELSE 1 END', ["{$query}%"])
             ->limit(6)

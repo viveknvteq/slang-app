@@ -116,7 +116,7 @@
                     Smart Search
                 </h3>
 
-                <p class="text-gray-400">
+                <p class="text-gray-400"> 
                     Find slang instantly with lightning-fast live search.
                 </p>
 

@@ -116,7 +116,7 @@
                     Smart Search
                 </h3>
 
-                <p class="text-gray-400">
+                <p class="text-gray-400"> 
                     Find slang instantly with lightning-fast live search.
                 </p>
 
@@ -183,9 +183,15 @@
 
         <div class="flex justify-center gap-6 mt-4 text-lg">
 
-            <i class="fa-brands fa-github hover:text-white"></i>
-            <i class="fa-brands fa-instagram hover:text-white"></i>
-            <i class="fa-brands fa-twitter hover:text-white"></i>
+            <a href="https://github.com/motghareVivek/Slang_Management_System.git" target="_blank" class="hover:text-white">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://instagram.com/slangdict" target="_blank" class="hover:text-white">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com/slangdict" target="_blank" class="hover:text-white">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
 
         </div>
 
