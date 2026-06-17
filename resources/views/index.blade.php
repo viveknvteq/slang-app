@@ -16,7 +16,7 @@
         <h1 class="text-5xl md:text-6xl font-extrabold mb-6">
 
             <span class="bg-linear-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                College Slang
+                College Slang Dictionary
             </span>
 
         </h1>
@@ -116,7 +116,7 @@
                     Smart Search
                 </h3>
 
-                <p class="text-gray-400"> 
+                <p class="text-gray-400">
                     Find slang instantly with lightning-fast live search.
                 </p>
 
