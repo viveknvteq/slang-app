@@ -16,13 +16,13 @@
         <h1 class="text-5xl md:text-6xl font-extrabold mb-6">
 
             <span class="bg-linear-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                College Slang
+                College Slang Dictionary
             </span>
 
         </h1>
 
         <p class="text-gray-400 max-w-xl mb-10 text-lg">
-            Search, explore and contribute trending slang words used in college and internet culture.
+            Search, explore and contribute trending slang words used in college and internet culture world wide.
         </p>
         <!-- SEARCH BAR -->
 
@@ -183,14 +183,14 @@
 
         <div class="flex justify-center gap-6 mt-4 text-lg">
 
-            <a href="https://github.com/slangdict" target="_blank" class="hover:text-white">
+            <a href="https://github.com/motghareVivek/Slang_Management_System.git" target="_blank" class="hover:text-white">
                 <i class="fa-brands fa-github"></i>
             </a>
             <a href="https://instagram.com/slangdict" target="_blank" class="hover:text-white">
                 <i class="fa-brands fa-instagram"></i>
             </a>
             <a href="https://twitter.com/slangdict" target="_blank" class="hover:text-white">
-                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-x-twitter"></i>
             </a>
 
         </div>
