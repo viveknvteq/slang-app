@@ -22,7 +22,7 @@
         </h1>
 
         <p class="text-gray-400 max-w-xl mb-10 text-lg">
-            Search, explore and contribute trending slang words used in college and internet culture world wide.
+            Search, explore and contribute trending slang words used in college and internet culture.
         </p>
         <!-- SEARCH BAR -->
 
